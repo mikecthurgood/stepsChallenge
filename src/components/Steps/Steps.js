@@ -3,7 +3,7 @@ import Button from '../Button'
 import StepHeader from './StepHeader'
 import Styled from 'styled-components'
 
-const Steps = ({children, border}) => {
+const Steps = ({children, config}) => {
     const userSteps = children.filter(step => !step.props.final)
     const finalStep = children.find(step => step.props.final)
     const [activeStep, setActiveStep] = useState(0)
@@ -39,7 +39,7 @@ const Steps = ({children, border}) => {
     }
     
     return (
-        <StepsContainer isMobile={isMobile} border={border}>
+        <StepsContainer isMobile={isMobile} config={config}>
             <StepHeader activeStep={activeStep} steps={userSteps} />
             {!finalStepActive && (
                 <StepContainer largeImages={userSteps[activeStep].props.largeImages}>
@@ -52,7 +52,7 @@ const Steps = ({children, border}) => {
                 </StepContainer>
             )}
             <CtaContainer>
-                <Button onClick={nextStep}>
+                <Button onClick={nextStep} >
                     {ctaText()}
                 </Button>
             </CtaContainer>
@@ -70,7 +70,8 @@ const StepsContainer = Styled.div`
     justify-content: center;
     margin: 2%;
     width: 96%;
-    border: ${({ border }) => (border ? '1px solid #282c34' : 'none')} ;
+    border: ${({ config }) => (config.border ? '1px solid' : 'none')};
+    border-color: ${({ config }) => (config.border && config.border.color ? config.border.color : '#282c34')};
     border-radius: 5px;
     height: 100%;
     text-align: center;

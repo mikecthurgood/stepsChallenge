@@ -2,9 +2,15 @@ import Steps from '../Steps'
 import Step from '../Steps/Step'
 
 function CoolCustomStepComponent() {
+  const config = {
+    // border: {
+    //   color: 'red'
+    // },
+    border: true
+  }
   return (
     <>
-      <Steps border>
+      <Steps config={config}>
         <Step>
           <img src='/kenobi.png' />
           <p>Hello There</p>
