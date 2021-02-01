@@ -23,7 +23,7 @@ export default StepHeader;
 const Header = Styled.div`
     height: 50px;
     width: 90%;
-    position: absolute;
+    position: relative;
     margin: 10px auto;
     top: 0;
     display: flex;
