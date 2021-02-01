@@ -69,10 +69,10 @@ const StepsContainer = Styled.div`
     flex-direction: column;
     justify-content: center;
     margin: 2%;
-    width: ${({ isMobile }) => (isMobile ? '96%' : '50%')};
+    width: 96%;
     border: ${({ border }) => (border ? '1px solid #282c34' : 'none')} ;
-    border-radius: 8px;
-    /* height: 650px; */
+    border-radius: 5px;
+    height: 100%;
     text-align: center;
     margin-top: 50px;
 `
