@@ -3,9 +3,9 @@ import Button from '../Button'
 import StepHeader from './StepHeader'
 import Styled from 'styled-components'
 
-const Steps = ({children}) => {
+const Steps = ({children, border}) => {
     const userSteps = children.filter(step => !step.props.final)
-    const finalStep = children.filter(step => step.props.final)
+    const finalStep = children.find(step => step.props.final)
     const [activeStep, setActiveStep] = useState(0)
     const [finalStepActive, setFinalStepActive] = useState(false)
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -39,15 +39,15 @@ const Steps = ({children}) => {
     }
     
     return (
-        <StepsContainer isMobile={isMobile}>
+        <StepsContainer isMobile={isMobile} border={border}>
             <StepHeader activeStep={activeStep} steps={userSteps} />
             {!finalStepActive && (
-                <StepContainer>
+                <StepContainer largeImages={userSteps[activeStep].props.largeImages}>
                     {userSteps[activeStep]}
                 </StepContainer>
             )}
             {finalStepActive && (
-                <StepContainer largeImages>
+                <StepContainer largeImages={finalStep.props.largeImages}>
                     {finalStep}
                 </StepContainer>
             )}
@@ -70,10 +70,11 @@ const StepsContainer = Styled.div`
     justify-content: center;
     margin: 2%;
     width: ${({ isMobile }) => (isMobile ? '96%' : '50%')};
-    border: 1px solid #282c34;
+    border: ${({ border }) => (border ? '1px solid #282c34' : 'none')} ;
     border-radius: 8px;
-    height: 650px;
+    /* height: 650px; */
     text-align: center;
+    margin-top: 50px;
 `
 
 const StepContainer = Styled.div`
@@ -83,13 +84,14 @@ const StepContainer = Styled.div`
     
     img {
         border-radius: 5px;
-        width: ${({ largeImages }) => (largeImages ? '95%' : '70%')};
+        width: ${({ largeImages }) => (largeImages ? '95%' : '40%')};
     }
 `
 
 const CtaContainer = Styled.div`
     height: 50px;
-    position: absolute;
+    position: relative;
     bottom: 0;
-    margin: 0 10px;
+    margin: 10px 10px 0 10px;
+    max-width: 100px;
 `
